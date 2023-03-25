@@ -22,6 +22,7 @@ header('Content-Type: application/json; charset=utf-8');
 //  4.1 set Notification_DBS to updated_dbs
 
 $response = array();
+session_start();
 
 if (isTheseParametersAvailable(array(
     'allocated_dbs', 'mgs', 'lcv', 'updated_dbs'
@@ -30,14 +31,14 @@ if (isTheseParametersAvailable(array(
     $mgs = $_POST['mgs'];
     $allocated_dbs = $_POST['allocated_dbs']; 
     $updated_dbs = $_POST['updated_dbs'];
-    // $operator_id = $_SESSION['user_id'];
-    $operator_id = 'Ritik_testing';
+    $operator_id = $_SESSION['user_id'];
+    // $operator_id = 'Ritik_testing';
 
-    echo "\n - - LCV - -", $lcv, " - -\n";
-    echo "\n - - MGS - -", $mgs, " - -\n";
-    echo "\n - - Allocated DBS - -", $allocated_dbs, " - -\n";
-    echo "\n - - Updated DBS - -", $updated_dbs, " - -\n";
-    echo "\n - - Operator - -", $operator_id, " - -\n";
+    // echo "\n - - LCV - -", $lcv, " - -\n";
+    // echo "\n - - MGS - -", $mgs, " - -\n";
+    // echo "\n - - Allocated DBS - -", $allocated_dbs, " - -\n";
+    // echo "\n - - Updated DBS - -", $updated_dbs, " - -\n";
+    // echo "\n - - Operator - -", $operator_id, " - -\n";
 
     // $check_res = check_updated_dbs_scheduling($conn, $updated_dbs);
     // echo "\n - - - -", json_encode($check_res), " - -\n";
@@ -51,7 +52,7 @@ if (isTheseParametersAvailable(array(
         $update_res = update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $operator_id);
         $response['update_res'] = $update_res;
 
-        echo "\n - update allocation func response - ", json_encode($update_res), "\n";
+        // echo "\n - update allocation func response - ", json_encode($update_res), "\n";
 
         if($update_res['error'] == true) {
             
@@ -69,7 +70,7 @@ if (isTheseParametersAvailable(array(
                 $request_res = update_request($conn, $prev_request_id, $operator_id);
                 $response['request_res'] = $request_res;
 
-                echo "\n - update request func response - ", json_encode($request_res), "\n";
+                // echo "\n - update request func response - ", json_encode($request_res), "\n";
 
                 if($request_res['error'] == true) {
                     $response['error'] = true;
@@ -83,7 +84,7 @@ if (isTheseParametersAvailable(array(
 
                 $notif_res = update_notification($conn, $notification_id, $lcv, $updated_dbs);
                 $response['notif_res'] = $notif_res;
-                echo "\n - update notification func response - ", json_encode($notif_res), "\n";
+                // echo "\n - update notification func response - ", json_encode($notif_res), "\n";
 
                 if($notif_res['error'] == true) {
                     $response['error'] = true;
@@ -100,11 +101,12 @@ if (isTheseParametersAvailable(array(
     $response['message'] = 'Enter all Mandatory fields';
 }
 
-echo "\n - - response:";
+session_abort();
+// echo "\n - - response:";
 echo json_encode($response);
 
-echo "\n - - manual rescheduling end - - \n";
-echo 1;
+// echo "\n - - manual rescheduling end - - \n";
+// echo 1;
 
 
 function check_updated_dbs_scheduling($conn, $dbs) {
@@ -130,7 +132,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
     //         where LCV_num = '$lcv' and Status = 'Scheduled' 
     //         order by Allocation_date desc
     // )";
-    echo "\n - - Update allocation func start - - \n";
+    // echo "\n - - Update allocation func start - - \n";
 
     $select_query = "SELECT * from luag_lcv_allocation_to_dbs_request 
         where LCV_num = '$lcv' and DBS='$allocated_dbs' and Status = 'Scheduled'
@@ -139,7 +141,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
     $row_count = mysqli_num_rows($select_result);
     $response = array();
 
-    echo "\n - - select allocation count: $row_count - - \n";
+    // echo "\n - - select allocation count: $row_count - - \n";
 
     $alloc_id = null;
     $request_id = null;
@@ -147,7 +149,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
 
     if($row_count > 0) {
         $row = $select_result->fetch_assoc();
-        echo "\n - - select row - -", json_encode($row), " - -\n";
+        // echo "\n - - select row - -", json_encode($row), " - -\n";
 
         $alloc_id = $row['Sno'];
         $request_id = $row['Request_id'];
@@ -160,7 +162,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
         $notif_response = get_notification_data($conn, $notif_id, $lcv);
         $response['get_notification_id_response'] = $notif_response;
 
-        echo "\n - notification response - ", json_encode($notif_response), "\n";
+        // echo "\n - notification response - ", json_encode($notif_response), "\n";
 
         if($notif_response['error'] == true) {
             
@@ -186,13 +188,13 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
 
             $insert_result = mysqli_query($conn, $insert_query);
 
-            echo "\n - - insert allocation result - - \n";
+            // echo "\n - - insert allocation result - - \n";
 
             if($insert_result) {
 
                 $insert_id = $conn->insert_id;
 
-                echo "\n - - insert id :", $insert_id, "\n";
+                // echo "\n - - insert id :", $insert_id, "\n";
 
                 if($alloc_id != null) {
                     $update_query = "UPDATE luag_lcv_allocation_to_dbs_request 
@@ -202,7 +204,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
 
                     $update_result = mysqli_query($conn, $update_query);
 
-                    echo "\n - - update allocation result: ", json_encode($update_result), "\n";
+                    // echo "\n - - update allocation result: ", json_encode($update_result), "\n";
                 
                     if($update_result) {
 
@@ -231,7 +233,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
             }
         }
 
-    echo "\n - - Update allocation func end - - \n";
+    // echo "\n - - Update allocation func end - - \n";
 
     return $response;
 
@@ -239,7 +241,7 @@ function update_allocation($conn, $mgs, $lcv, $allocated_dbs, $updated_dbs, $ope
 
 function get_notification_data($conn, $notification_id, $lcv){
 
-    echo "\n - - get notif data func Start - - \n";
+    // echo "\n - - get notif data func Start - - \n";
     if($notification_id == null) {
         $notification_id = 0;
     }
@@ -252,7 +254,7 @@ function get_notification_data($conn, $notification_id, $lcv){
 
     if($sel_count > 0) {
         $notif_row = $select_result->fetch_assoc();
-        echo "\n - notif row- ", json_encode($notif_row), "\n";
+        // echo "\n - notif row- ", json_encode($notif_row), "\n";
 
         if($notif_row['flag'] >= 4) {
             $response['error'] = true;
@@ -266,14 +268,14 @@ function get_notification_data($conn, $notification_id, $lcv){
         $response['message'] = 'No data found in notificcation for selected LCV.';
     }
 
-    echo "\n - - get notif data func end - - \n";
+    // echo "\n - - get notif data func end - - \n";
 
     return $response;
 }
 
 function update_request($conn, $req_id, $operator_id) {
 
-    echo "\n - - update request func start - - \n";
+    // echo "\n - - update request func start - - \n";
 
     $req_update_query = "UPDATE luag_dbs_request 
         set MGS=null, 
@@ -284,7 +286,7 @@ function update_request($conn, $req_id, $operator_id) {
         where Request_id= '$req_id'";
     $req_update_result = mysqli_query($conn, $req_update_query);
 
-    echo "\n - -req update result: ", json_encode($req_update_result), "\n";
+    // echo "\n - -req update result: ", json_encode($req_update_result), "\n";
 
     $response = array();
     if($req_update_result) {
@@ -295,14 +297,14 @@ function update_request($conn, $req_id, $operator_id) {
         $response['message'] = "Unable to update LCV scheduing at this moment.";
     }
     
-    echo "\n - - update request func end - - \n";
+    // echo "\n - - update request func end - - \n";
 
     return $response;
 }
 
 function update_notification($conn, $notification_id,  $lcv, $updated_dbs) {
 
-    echo "\n - - update notification func start - - \n";
+    // echo "\n - - update notification func start - - \n";
 
     $update_notif_query = "UPDATE notification set Notification_DBS = '$updated_dbs' 
         where Notification_Id = $notification_id";
@@ -320,7 +322,7 @@ function update_notification($conn, $notification_id,  $lcv, $updated_dbs) {
         $response['message'] = 'Unable to update Notification';
     }
 
-    echo "\n - - update notification func end - - \n";
+    // echo "\n - - update notification func end - - \n";
     return $response;
 }
 

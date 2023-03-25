@@ -39,19 +39,25 @@ function approve(event) {
 
                 console.log('calling API \n');
 
-                // $.ajax({
-                //     url: '../CNG_API/rescheduling.php',
-                //     type: 'POST',
-                //     data: data,
-                //     success: function(response, textStatus, jqXHR) {
-                //         console.log('response: ', response)
-                //     },
-                //     error: function(jqXHR, textStatus, errorThrown){
-                //         console.log('Error ');
-                //         console.log(jqXHR);
-                //         console.log(textStatus, errorThrown);
-                //     }
-                // })
+                $.ajax({
+                    url: '../CNG_API/rescheduling.php',
+                    type: 'POST',
+                    data: data,
+                    success: function(response, textStatus, jqXHR) {
+                        console.log('response: ', response)
+                        if(response['error'] == true){
+                            alert(`Error!! ${response['message']}`)
+                        } else {
+                            alert(`Success!! ${response['message']}`)
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        console.log('Error ');
+                        alert('Error!')
+                        console.log(jqXHR);
+                        console.log(textStatus, errorThrown);
+                    }
+                })
 
             }
 
