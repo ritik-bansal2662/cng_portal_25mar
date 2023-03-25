@@ -1,0 +1,96 @@
+.loading {
+    display: none;
+    justify-content: space-around;
+}
+.error {
+    display: none;
+    justify-content: space-around;
+    color: red;
+}
+
+/* #loading_table.active,
+#loading-map.active,
+#error_table.active,
+#error-map.active {
+    display: flex;
+}  */
+
+.active {
+    display: flex;
+}
+
+.vehicle-moving-status {
+    color: red;
+    display: none;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.map-popup .overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 2;
+    display: none;
+}
+
+.map-popup .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    background: #fff;
+    width: 97%;
+    height: auto;
+    z-index: 2;
+    padding: 20px;
+    margin: 10px 20px 20px 10px;
+    border-radius: 5px;
+}
+
+.map-popup .close-btn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: #222;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.map-popup #map {
+    width: 100%;
+    height: 400px;
+    /* background: #fff; */
+    border: 2px solid #000;
+}
+
+.map-popup.active .overlay {
+    display: block;
+}
+
+.map-popup.active .content {
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%,-50%) scale(1);
+}
+
+.marker-details {
+    font-size: 25px;
+}
+
+@media screen and (max-width: 991px) {
+    .map-popup .content {
+        margin: 50px 10px 20px 5px;
+    }
+}
+

@@ -1,0 +1,179 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    color: #000;
+    font-size: 1.6rem;
+}
+
+h3 {
+    text-align: center;
+}
+
+/* .label {
+    margin-bottom: 0;
+    padding-right: 15px;
+    margin-right: 15px;
+} */
+.label {
+    font-size: 18px;
+}
+
+.reg-main {
+    background-color: #878451;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    font-size: 20px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.reg-main div {
+    cursor: pointer;
+    /* width: 30%; */
+    height: 100%;
+    padding-top: 10px ;
+    text-align: center;
+}
+
+.organization,
+.employee,
+.gen-info, .eqp-info, .ins-info, .cas-info, .scheduling  {
+    margin: 20px;
+    color: black;
+    display: none;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 30px;
+}
+
+.scheduling {
+    display: block;
+}
+
+
+
+
+.main-active {
+    border-bottom: 5px solid rgb(107, 4, 4);
+}
+
+.main-content {
+    margin-left: 250px;
+}
+
+.content-active {
+    display: block;
+}
+
+/* .inp-group{
+    display: flex;
+    justify-content: space-around;
+} */
+
+.inp-group{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.input {
+    height: 40px;
+    font-size: 18px;
+    padding-left: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 8px;
+}
+
+select[readonly]
+{
+    pointer-events: none;
+}
+
+.color-brown {
+    color: #a52a2a;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.cancel-btn, .submit-btn {
+    width: 100px;
+    margin: 10px;
+}
+
+.back-btn {
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#download_excel_div {
+    display: flex;
+    /* border: 1px solid #000; */
+    justify-content: right;
+    margin-bottom: 10px;
+}
+
+/* table editing */
+
+.table_div {
+    overflow-x: scroll;
+}
+
+tbody#table_body {
+    background-color: #f4f8fb;
+}
+
+.fixTableHead { 
+    overflow-y: auto; 
+    max-height: 400px;
+} 
+.fixTableHead thead tr { 
+    position: sticky; 
+    top: 0; 
+} 
+
+/*  */
+.availability-msg {
+    color: green;
+    font-size: medium;
+    display: none;
+    justify-content: end;
+}
+
+
+@media screen and (max-width: 991px) {
+    .reg-main {
+        height: 80px;
+    }
+    .label-extra {
+        margin-left: 0;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+    .gen-info, .eqp-info, .ins-info, .cas-info, .scheduling {
+        /* width: 100%; */
+        margin: 0;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .main-content {
+        margin-left: 0;
+    }
+}

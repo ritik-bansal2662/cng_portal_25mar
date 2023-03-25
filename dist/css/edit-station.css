@@ -1,0 +1,79 @@
+
+/* .reg-main {
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    font-size: 20px;
+} */
+
+/* .reg-main div {
+    cursor: pointer;
+    width: 30vh;
+    height: 100%;
+    padding-top: 10px ;
+    text-align: center;
+} */
+
+/* .main-active {
+    border-bottom: 5px solid red;
+} */
+
+.gen-info.content-active, .eqp-info.content-active, .ins-info.content-active {
+    display: block;
+}
+
+/* .gen-info, .eqp-info, .ins-info {
+    margin: 20px;
+    width: 95%;
+    display: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 50px;
+}
+ */
+
+
+#mgs, .mgs {
+    display: none;
+}
+
+.location-gps {
+    cursor: pointer;
+}
+
+/* .input {
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+    padding-left: 20px;
+    margin: 10px 10px 10px 0;
+    display: block;
+    border-radius: 8px;
+} */
+
+.cancel-btn, .submit-btn {
+    width: 100px;
+    margin: 10px;
+}
+
+.mgs-extra {
+    visibility: hidden;
+}
+
+.extra {
+    visibility: hidden;
+}
+
+
+/* @media screen and (max-width: 991px) {
+    .extra {
+        visibility: visible;
+        display: none;
+    }
+    .reg-main {
+        height: 80px;
+    }
+} */
